@@ -1,0 +1,60 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+
+import 'screens/SplashScreen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    precacheImage(
+        AssetImage(
+          'assets/images/cardImage.jpg',
+        ),
+        context);
+    precacheImage(
+        AssetImage(
+          'assets/images/smallCardImage.jpg',
+        ),
+        context);
+    precacheImage(
+        AssetImage(
+          'assets/images/profileImage.png',
+        ),
+        context);
+    precacheImage(
+        AssetImage(
+          'assets/images/shareImage.png',
+        ),
+        context);
+    precacheImage(
+        AssetImage(
+          'assets/images/splashScreen.png',
+        ),
+        context);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    return MaterialApp(
+      builder: (BuildContext context, Widget child) {
+        return MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaleFactor: 1.0, alwaysUse24HourFormat: false),
+          child: child,
+        );
+      },
+      theme: ThemeData(
+        primaryColor: Color(0xFF0F2985),
+        primarySwatch: Colors.blue,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+    );
+  }
+}
